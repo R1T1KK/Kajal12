@@ -1193,19 +1193,23 @@
         });
 
         // FUNCTION TO PLAY MUSIC logic
-function playMusic() {
-    if (music.paused) {
-        music.play().then(() => {
-            console.log("Music started");
-        }).catch(() => {
-            console.log("Autoplay blocked");
-        });
-    }
-}
-document.addEventListener("mousemove", playMusic, { once: true });
-document.addEventListener("click", playMusic, { once: true });
-document.addEventListener("keydown", playMusic, { once: true });
-music.volume = 1;
+  function playMusic() {
+            if (!music || !music.paused) return;
+
+            music.play().then(() => {
+                console.log('Music started');
+            }).catch(() => {
+                console.log('Autoplay blocked');
+            });
+        }
+
+        document.addEventListener('mousemove', playMusic, { once: true });
+        document.addEventListener('click', playMusic, { once: true });
+        document.addEventListener('keydown', playMusic, { once: true });
+
+        if (music) {
+            music.volume = 1;
+        }
     </script>
 </body>
 
