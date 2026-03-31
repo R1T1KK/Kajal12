@@ -18,6 +18,7 @@
         }
 
         body {
+
             font-family: 'Outfit', sans-serif;
             margin: 0;
             padding: 0;
@@ -919,8 +920,8 @@
             <button class="btn-close" onclick="closeMessageModal()">Close Message</button>
         </div>
     </div>
-    <audio id="bg-music" loop preload="auto">
-    <source src="./music/happy-birthday.mp3">
+    <audio id="bg-music" loop autoplay muted>
+        <source src="./music/happy-birthday.mp3" type="audio/mpeg">
     </audio>
     <script>
         // Setup Ambient Floating Particles
@@ -1192,24 +1193,27 @@
             document.getElementById('cakeRight').innerHTML = cakeDOM;
         });
 
-        // FUNCTION TO PLAY MUSIC logic
-  function playMusic() {
-            if (!music || !music.paused) return;
+const music = document.getElementById("bg-music");
+document.addEventListener("DOMContentLoaded", () => {
 
-            music.play().then(() => {
-                console.log('Music started');
-            }).catch(() => {
-                console.log('Autoplay blocked');
-            });
+    const music = document.getElementById("bg-music");
+
+    music.volume = 0.7;
+
+    function startMusic() {
+        music.muted = false;
+
+        if (music.paused) {
+            music.play().catch(() => {});
         }
+    }
 
-        document.addEventListener('mousemove', playMusic, { once: true });
-        document.addEventListener('click', playMusic, { once: true });
-        document.addEventListener('keydown', playMusic, { once: true });
+    // First interaction = play music
+    document.body.addEventListener("click", startMusic, { once: true });
+    document.body.addEventListener("mousemove", startMusic, { once: true });
+    document.body.addEventListener("touchstart", startMusic, { once: true });
 
-        if (music) {
-            music.volume = 1;
-        }
+});
     </script>
 </body>
 
