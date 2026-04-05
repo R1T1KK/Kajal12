@@ -773,19 +773,19 @@
     position: fixed;
     pointer-events: none;
     z-index: 9999;
-    font-size: 0.7rem;   /* 🔥 smaller = thinner */
-    opacity: 0.7;        /* 🔥 lighter look */
-    animation: trailFade 0.8s ease-out forwards;
+    font-size: 1.4rem;   /* 🔥 larger size */
+    opacity: 1;        /* 🔥 lighter look */
+    animation: trailFade 4.5s ease-out forwards;
 }
 
 @keyframes trailFade {
     0% {
-        opacity: 0.8;
+        opacity: 1;
         transform: translate(-50%, -50%) scale(1);
     }
     100% {
         opacity: 0;
-        transform: translate(-50%, -50%) scale(0.4);
+        transform: translate(-50%, -50%) scale(0.8);
     }
 }
         /* Custom cursor */
@@ -1504,24 +1504,24 @@ document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
 
-    // 🔥 very less particles = thin trail
-    if (Math.random() > 0.9) {
+    // 🔥 even more particles = much longer trail
+    if (Math.random() > 0.5) {
 
         const trail = document.createElement('div');
         trail.className = 'cursor-trail';
         trail.innerHTML = trailEmojis[Math.floor(Math.random() * trailEmojis.length)];
 
-        // 🔥 tight spread (narrow trail)
-        const offsetX = (Math.random() - 0.5) * 10;
-        const offsetY = (Math.random() - 0.5) * 10;
+        // 🔥 wider spread for longer trail
+        const offsetX = (Math.random() - 0.5) * 15;
+        const offsetY = (Math.random() - 0.5) * 15;
 
         trail.style.left = (mouseX + offsetX) + 'px';
         trail.style.top = (mouseY + offsetY) + 'px';
 
         document.body.appendChild(trail);
 
-        // remove after animation
-        setTimeout(() => trail.remove(), 800);
+        // remove after 3.5 seconds
+        setTimeout(() => trail.remove(), 3500);
     }
 });
 
