@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday</title>
+    <title>Happy Birthday Kajal!</title>
     <!-- Importing modern minimal fonts and a beautiful cursive font for romance -->
     <link
         href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@1,600&display=swap"
@@ -644,31 +644,7 @@
                 transform: translateX(-50%);
             }
         }
- .cursor-trail {
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            font-size: 1.5rem;
-            opacity: 0;
-            animation: trailFade 1s ease-out forwards;
-        }
 
-        @keyframes trailFade {
-            0% {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1);
-            }
-
-            100% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0.5);
-            }
-        }
-
-        /* Custom cursor */
-        * {
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="6" fill="none" stroke="%23ff416c" stroke-width="2"/><circle cx="16" cy="16" r="3" fill="%23ff416c"/></svg>') 16 16, auto;
-        }
         /* Magical glowing light burst from inside the split cake */
         .magical-light {
             position: absolute;
@@ -792,6 +768,242 @@
             }
         }
 
+        /* Cursor Trail Effect */
+        .cursor-trail {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            font-size: 1.5rem;
+            opacity: 0;
+            animation: trailFade 1s ease-out forwards;
+        }
+
+        @keyframes trailFade {
+            0% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.5);
+            }
+        }
+
+        /* Custom cursor */
+        * {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="6" fill="none" stroke="%23ff416c" stroke-width="2"/><circle cx="16" cy="16" r="3" fill="%23ff416c"/></svg>') 16 16, auto;
+        }
+
+        /* ===== PHOTO ALBUM SECTION ===== */
+        .album-section {
+            display: none;
+            opacity: 0;
+            transition: opacity 1.5s ease;
+            width: 100%;
+            max-width: 800px;
+            margin-top: 40px;
+        }
+
+        .album-section.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .album-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: #ffb3c6;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 15px rgba(255, 179, 198, 0.6);
+        }
+
+        .album-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .photo-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            cursor: pointer;
+            aspect-ratio: 1;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .photo-item:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 179, 198, 0.4);
+            border-color: rgba(255, 179, 198, 0.5);
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .photo-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .photo-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            transition: all 0.4s ease;
+        }
+
+        .photo-item:hover .photo-overlay {
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lightbox.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            animation: zoomIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(0, 0, 0, 0.5);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 0, 0, 0.3);
+        }
+
+        .lightbox-close:hover {
+            background: rgba(0, 0, 0, 0.8);
+            border-color: white;
+            transform: scale(1.1);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 2px solid rgba(239, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .lightbox-nav:hover {
+            background: rgba(0, 0, 0, 0.8);
+            border-color: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .lightbox-prev {
+            left: 20px;
+        }
+
+        .lightbox-next {
+            right: 20px;
+        }
+
+        .album-button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
         @media (max-width: 500px) {
             h1 {
                 font-size: 3.2rem;
@@ -816,6 +1028,22 @@
 
             .cake-wrapper {
                 transform: scale(0.85);
+            }
+
+            .album-title {
+                font-size: 2.5rem;
+            }
+
+            .photo-gallery {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                gap: 15px;
+                padding: 15px;
+            }
+
+            .lightbox-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 30px;
             }
         }
     </style>
@@ -912,25 +1140,74 @@
             <img src="kajal.png" alt="Our Love" class="card-img">
 
             <h1>Happy Birthday, Kajal!</h1>
-            <p class="subtitle">To the absolute special friend of my life ❤️</p>
+            <p class="subtitle">To the absolute special person of my life ❤️</p>
 
             <div class="slideshow-container">
-                <div class="slide-text active">"Happy Birthday to Kajal!."</div>
+                <div class="slide-text active">"Happy Birthday to my favorite person."</div>
                 <div class="slide-text">"Every moment with you feels like magic."</div>
                 <div class="slide-text">"You make my world so incredibly beautiful."</div>
                 <div class="slide-text">"I fall in love with you more every single day."</div>
             </div>
 
             <button class="btn-interactive" onclick="openMessageModal()">Read My Heart</button>
+            <button class="btn-interactive" onclick="showAlbum()" style="margin-top: 20px;">View Our Album</button>
         </div>
 
+        <!-- Photo Album Section -->
+        <div class="album-section" id="albumSection">
+            <h2 class="album-title">Our Beautiful Moments 📸</h2>
+            <p class="album-subtitle">Memories we've created together</p>
+            
+            <div class="photo-gallery" id="photoGallery">
+                <!-- Replace with your actual photos -->
+                <div class="photo-item" onclick="openLightbox(0)">
+                    <img src="photo1.jpg" alt="Photo 1">
+                    <div class="photo-overlay">🖼️</div>
+                </div>
+                <div class="photo-item" onclick="openLightbox(1)">
+                    <img src="photo2.jpg" alt="Photo 2">
+                    <div class="photo-overlay">🖼️</div>
+                </div>
+                <div class="photo-item" onclick="openLightbox(2)">
+                    <img src="photo3.jpg" alt="Photo 3">
+                    <div class="photo-overlay">🖼️</div>
+                </div>
+                <div class="photo-item" onclick="openLightbox(3)">
+                    <img src="photo4.jpg" alt="Photo 4">
+                    <div class="photo-overlay">🖼️</div>
+                </div>
+                <div class="photo-item" onclick="openLightbox(4)">
+                    <img src="photo5.jpg" alt="Photo 5">
+                    <div class="photo-overlay">🖼️</div>
+                </div>
+                <div class="photo-item" onclick="openLightbox(5)">
+                    <img src="photo6.jpg" alt="Photo 6">
+                    <div class="photo-overlay">🖼️</div>
+                </div>
+            </div>
+
+            <div class="album-button-group">
+                <button class="btn-interactive" onclick="hideAlbum()">Back</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <img id="lightboxImage" src="" alt="Full size photo">
+            <span class="lightbox-close" onclick="closeLightbox()">✕</span>
+            <span class="lightbox-nav lightbox-prev" onclick="prevPhoto()">❮</span>
+            <span class="lightbox-nav lightbox-next" onclick="nextPhoto()">❯</span>
+        </div>
     </div>
 
     <!-- Hidden Deep Emotional Message Modal -->
     <div class="modal-overlay" id="messageModal">
         <div class="modal-content">
             <h2>My Dearest,</h2>
-            <p>
+             <p>
                 On your special day, I want you to know just how incredibly deeply I fell for you.
                 You are my greatest blessing, my safest place, and my favorite adventure.
                 I cherish every smile, every laugh, and every quiet moment we share.
@@ -1086,33 +1363,7 @@
                 });
 
                 document.body.appendChild(burstItem);
-const trailEmojis = ['🎈', '🎉', '🎂', '🎁', '✨', '💖', '🌸', '💫', '❤️'];
-let mouseX = 0;
-let mouseY = 0;
 
-document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-
-    // Create trail particle at cursor position with randomness
-    if (Math.random() > 0.7) { // 30% chance of creating a particle
-        const trail = document.createElement('div');
-        trail.className = 'cursor-trail';
-        trail.innerHTML = trailEmojis[Math.floor(Math.random() * trailEmojis.length)];
-        
-        // Add slight offset to particles for natural spread
-        const offsetX = (Math.random() - 0.5) * 30;
-        const offsetY = (Math.random() - 0.5) * 30;
-        
-        trail.style.left = (mouseX + offsetX) + 'px';
-        trail.style.top = (mouseY + offsetY) + 'px';
-        
-        document.body.appendChild(trail);
-        
-        // Remove particle after animation completes
-        setTimeout(() => trail.remove(), 500);
-    }
-});
                 // Cleanup
                 setTimeout(() => burstItem.remove(), 2500);
             }
@@ -1244,6 +1495,35 @@ document.addEventListener('mousemove', (e) => {
             document.getElementById('cakeLeft').innerHTML = cakeDOM;
             document.getElementById('cakeRight').innerHTML = cakeDOM;
         });
+
+// Cursor Trail Effect
+const trailEmojis = ['🎈', '🎉', '✨', '💖', '🎁', '🎊', '❤️'];
+let mouseX = 0;
+let mouseY = 0;
+
+document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    // Create trail particle at cursor position with randomness
+    if (Math.random() > 0.7) { // 30% chance of creating a particle
+        const trail = document.createElement('div');
+        trail.className = 'cursor-trail';
+        trail.innerHTML = trailEmojis[Math.floor(Math.random() * trailEmojis.length)];
+        
+        // Add slight offset to particles for natural spread
+        const offsetX = (Math.random() - 0.5) * 30;
+        const offsetY = (Math.random() - 0.5) * 30;
+        
+        trail.style.left = (mouseX + offsetX) + 'px';
+        trail.style.top = (mouseY + offsetY) + 'px';
+        
+        document.body.appendChild(trail);
+        
+        // Remove particle after animation completes
+        setTimeout(() => trail.remove(), 1000);
+    }
+});
 
 const music = document.getElementById("bg-music");
 document.addEventListener("DOMContentLoaded", () => {
