@@ -769,27 +769,25 @@
         }
 
         /* Cursor Trail Effect */
-        .cursor-trail {
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            font-size: 1.5rem;
-            opacity: 0;
-            animation: trailFade 1s ease-out forwards;
-        }
+   .cursor-trail {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    font-size: 0.7rem;   /* 🔥 smaller = thinner */
+    opacity: 0.7;        /* 🔥 lighter look */
+    animation: trailFade 0.8s ease-out forwards;
+}
 
-        @keyframes trailFade {
-            0% {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1);
-            }
-
-            100% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0.5);
-            }
-        }
-
+@keyframes trailFade {
+    0% {
+        opacity: 0.8;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.4);
+    }
+}
         /* Custom cursor */
         * {
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="6" fill="none" stroke="%23ff416c" stroke-width="2"/><circle cx="16" cy="16" r="3" fill="%23ff416c"/></svg>') 16 16, auto;
@@ -1497,7 +1495,8 @@
         });
 
 // Cursor Trail Effect
-const trailEmojis = ['🎈', '🎉', '✨', '💖', '🎁', '🎊', '❤️'];
+// Cursor Trail Effect (THIN + SMOOTH VERSION)
+const trailEmojis = ['✨', '💖', '❤️']; // 🔥 less heavy emojis
 let mouseX = 0;
 let mouseY = 0;
 
@@ -1505,23 +1504,24 @@ document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
 
-    // Create trail particle at cursor position with randomness
-    if (Math.random() > 0.7) { // 30% chance of creating a particle
+    // 🔥 very less particles = thin trail
+    if (Math.random() > 0.9) {
+
         const trail = document.createElement('div');
         trail.className = 'cursor-trail';
         trail.innerHTML = trailEmojis[Math.floor(Math.random() * trailEmojis.length)];
-        
-        // Add slight offset to particles for natural spread
-        const offsetX = (Math.random() - 0.5) * 30;
-        const offsetY = (Math.random() - 0.5) * 30;
-        
+
+        // 🔥 tight spread (narrow trail)
+        const offsetX = (Math.random() - 0.5) * 10;
+        const offsetY = (Math.random() - 0.5) * 10;
+
         trail.style.left = (mouseX + offsetX) + 'px';
         trail.style.top = (mouseY + offsetY) + 'px';
-        
+
         document.body.appendChild(trail);
-        
-        // Remove particle after animation completes
-        setTimeout(() => trail.remove(), 1000);
+
+        // remove after animation
+        setTimeout(() => trail.remove(), 800);
     }
 });
 
