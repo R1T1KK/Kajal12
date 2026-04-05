@@ -644,7 +644,31 @@
                 transform: translateX(-50%);
             }
         }
+ .cursor-trail {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            font-size: 1.5rem;
+            opacity: 0;
+            animation: trailFade 1s ease-out forwards;
+        }
 
+        @keyframes trailFade {
+            0% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.5);
+            }
+        }
+
+        /* Custom cursor */
+        * {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="6" fill="none" stroke="%23ff416c" stroke-width="2"/><circle cx="16" cy="16" r="3" fill="%23ff416c"/></svg>') 16 16, auto;
+        }
         /* Magical glowing light burst from inside the split cake */
         .magical-light {
             position: absolute;
@@ -1062,7 +1086,33 @@
                 });
 
                 document.body.appendChild(burstItem);
+const trailEmojis = ['✨', '💖', '⭐'];
+let mouseX = 0;
+let mouseY = 0;
 
+document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    // Create trail particle at cursor position with randomness
+    if (Math.random() > 0.7) { // 30% chance of creating a particle
+        const trail = document.createElement('div');
+        trail.className = 'cursor-trail';
+        trail.innerHTML = trailEmojis[Math.floor(Math.random() * trailEmojis.length)];
+        
+        // Add slight offset to particles for natural spread
+        const offsetX = (Math.random() - 0.5) * 30;
+        const offsetY = (Math.random() - 0.5) * 30;
+        
+        trail.style.left = (mouseX + offsetX) + 'px';
+        trail.style.top = (mouseY + offsetY) + 'px';
+        
+        document.body.appendChild(trail);
+        
+        // Remove particle after animation completes
+        setTimeout(() => trail.remove(), 1000);
+    }
+});
                 // Cleanup
                 setTimeout(() => burstItem.remove(), 2500);
             }
